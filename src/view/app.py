@@ -26,7 +26,7 @@ class Foot:
 # group
 class ProductGroup:
     index: ProductPage
-    list[ProductPage]
+    group: list[ProductPage]
 
 # app
 class App:
