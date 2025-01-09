@@ -7,6 +7,7 @@
 ## Document
 
 - `docs/dev` Set development environment
+- `docs/arch` Layered-design of the app
 - `docs/deploy` Set deploy environment and configs
 
 ## Contribute
