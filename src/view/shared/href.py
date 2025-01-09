@@ -5,7 +5,7 @@ class LocalHref(Enum):
     Landing     = 1
     Product     = 2
     Contact     = 3
-    Doante      = 4
+    Donate      = 4
 
 class OutHref:
     to: str
