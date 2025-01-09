@@ -1,0 +1,44 @@
+- Write test data
+  - src/test/nav
+  - src/test/foot
+  - src/test/data/landing
+  - src/test/data/product
+  - src/test/data/contact
+  - src/test/data/donate
+- Write template/printable
+  - Just for print data honestly
+- Write JSON-fetch in main
+  - Read data from 'resources'
+- Write template/html
+  - For static site
+  - Use Jinja2
+- Write docs/dev
+  - venv settings
+  - python version (especially typehints)
+- Write docs/deploy
+  - venv settings
+  - install & deploy script
+  - how to deploy in vercel
+- Write docs/arch
+  - model-data-service-view-template
+
+[ARCH: model]
+highest policy entities
+
+[ARCH: data]
+input-data definations of 'service'
+
+- own input-data of 'serivce'
+- construction of 'model'
+
+[ARCH: service]
+transform 'data' to 'view'
+
+[ARCH: view]
+abstracted context of actual screen
+
+- data-centric
+- must not platform-dependent (especially HTML)
+
+[ARCH: template]
+transform 'view' to actual files for deployment
