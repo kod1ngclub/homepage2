@@ -1,5 +1,6 @@
 from view.shared.href import OutHref
 
+from dataclasses import dataclass
 from enum import Enum
 
 class Icon(Enum):
@@ -15,10 +16,12 @@ class Icon(Enum):
     Blog        = 7
     Github      = 8
 
+@dataclass
 class ContactCard:
     head: str
     href: OutHref
     icon: Icon
 
+@dataclass
 class ContactPage:
     contacts: list[ContactCard]

@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 class LocalHref(Enum):
@@ -7,5 +8,6 @@ class LocalHref(Enum):
     Contact     = 3
     Donate      = 4
 
+@dataclass
 class OutHref:
     to: str

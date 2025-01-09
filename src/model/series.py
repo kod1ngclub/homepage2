@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 class SeriesName(Enum):
@@ -5,6 +6,7 @@ class SeriesName(Enum):
     Cod         = 1
     Etc         = 2
 
+@dataclass
 class Series:
-    name: SeriesName
-    description: str
+    name: SeriesName    = SeriesName.Etc
+    description: str    = ""

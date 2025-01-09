@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from enum import Enum
 
 class Media(Enum):
@@ -13,7 +14,8 @@ class Media(Enum):
     Blog        = 7
     Github      = 8
 
+@dataclass
 class Contact:
-    name: str
-    media: Media
-    href: str
+    name: str       = ""
+    media: Media    = Media.Email
+    href: str       = ""
