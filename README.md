@@ -20,5 +20,5 @@
 
 This repository is under **MIT**
 
-[vlink]: https://www.example.com
-[discord]: https://www.example.com
+[vlink]: https://kod1nghub.vercel.app
+[discord]: https://discord.gg/hut3JP45Qf
