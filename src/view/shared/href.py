@@ -1,10 +1,11 @@
 from enum import Enum
 
 class LocalHref(Enum):
-    Landing     = 0
-    Product     = 1
-    Contact     = 2
-    Doante      = 3
+    ROOT        = 0
+    Landing     = 1
+    Product     = 2
+    Contact     = 3
+    Doante      = 4
 
 class OutHref:
     to: str
