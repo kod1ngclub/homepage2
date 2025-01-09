@@ -19,14 +19,14 @@ class ProductService:
         self.data = data
 
     def BuildIndex(self) -> ProductPage:
-        page = ProductPage()
+        page = ProductPage(filter=Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered), cards=[])
 
         page.filter.star        = StarFiltered.NonFiltered
         page.filter.series      = SeriesFiltered.NonFiltered
-        page.filter.level       = LevelFiltered.NotFiltered
+        page.filter.level       = LevelFiltered.NonFiltered
 
         for item in self.data.products:
-            c = ProductCard()
+            c = ProductCard(head="", body="", star=False)
             c.head      = item.name
             c.body      = item.description
             c.star      = item.star
@@ -44,14 +44,14 @@ class ProductService:
         for starcond in starconds:
             for seriescond in seriesconds:
                 for levelcond in levelconds:
-                    filtercond          = Filter()
+                    filtercond          = Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered)
                     filtercond.star     = starcond
                     filtercond.series   = seriescond
                     filtercond.level    = levelcond
 
         pages: list[ProductPage] = []
         for filtercond in filterconds:
-            page = ProductPage()
+            page = ProductPage(filter=Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered), cards=[])
 
             page.filter = filtercond
 
@@ -79,7 +79,7 @@ class ProductService:
                     filtered = [item for item in filtered if (item.level == LevelName.Deprecated)]
 
             for item in filtered:
-                c           = ProductCard()
+                c           = ProductCard(head="", body="", star=False)
                 c.head      = item.name
                 c.body      = item.description
                 c.star      = item.star

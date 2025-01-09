@@ -2,6 +2,7 @@ from model.donate import Donate
 
 from view.donate import DonatePage
 from view.donate import DonateCard
+from view.shared.href import OutHref
 
 class DonateData:
     donates: list[Donate]
@@ -13,13 +14,13 @@ class DonateService:
         self.data = data
 
     def Build(self) -> DonatePage:
-        page = DonatePage()
+        page = DonatePage(main=DonateCard(head="", href=OutHref("")), subs=[])
 
         page.main.head      = self.data.donates[0].name
         page.main.href.to   = self.data.donates[0].href
 
         for item in self.data.donates[:1]:
-            c           = DonateCard()
+            c           = DonateCard(head="", href=OutHref(""))
             c.head      = item.name
             c.href.to   = item.href
 

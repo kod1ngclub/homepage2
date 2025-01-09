@@ -4,6 +4,7 @@ from model.contact import Media
 from view.contact import ContactPage
 from view.contact import ContactCard
 from view.contact import Icon
+from view.shared.href import OutHref
 
 class ContactData:
     contacts: list[Contact]
@@ -15,11 +16,13 @@ class ContactService:
         self.data = data
 
     def Build(self) -> ContactPage:
-        page = ContactPage()
+        page = ContactPage(
+            contacts=[]
+        )
 
         # push contact-cards
         for item in self.data.contacts:
-            c = ContactCard()
+            c = ContactCard(head="", href=OutHref(""), icon=Icon.Email)
 
             c.head = item.name
             c.href.to = item.href
