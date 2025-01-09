@@ -1,6 +1,8 @@
 from model.product import Product
-from model.series import SeriesName
 from model.product import LevelName
+from model.series import SeriesName
+
+from service.data.product import ProductData
 
 from view.product import ProductPage
 from view.product import ProductCard
@@ -9,8 +11,6 @@ from view.product import StarFiltered
 from view.product import SeriesFiltered
 from view.product import LevelFiltered
 
-class ProductData:
-    products: list[Product]
 
 class ProductService:
     data: ProductData

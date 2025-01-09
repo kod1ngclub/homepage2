@@ -1,13 +1,11 @@
-from model.contact import Contact
 from model.contact import Media
+
+from service.data.contact import ContactData
 
 from view.contact import ContactPage
 from view.contact import ContactCard
 from view.contact import Icon
 from view.shared.href import OutHref
-
-class ContactData:
-    contacts: list[Contact]
 
 class ContactService:
     data: ContactData

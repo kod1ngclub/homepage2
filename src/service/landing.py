@@ -1,3 +1,5 @@
+from service.data.landing import LandingData
+
 from view.landing import LandingPage
 from view.landing import ProductSection
 from view.landing import SeriesSection
@@ -7,26 +9,6 @@ from view.shared.button import Button, OutButton
 from view.shared.image import Image
 from view.shared.href import OutHref
 from view.shared.href import LocalHref
-
-class ProductImage:
-    source: str
-    alt: str
-
-class ProductExample:
-    name: str
-    description: list[str]
-    href: str
-    image: ProductImage
-
-class SeriesExample:
-    name: str
-    description: list[str]
-
-class LandingData:
-    products: list[ProductExample]
-    serieses: list[SeriesExample]
-    github: str
-    discord: str
 
 class LandingService:
     data: LandingData

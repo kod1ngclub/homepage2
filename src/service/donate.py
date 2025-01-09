@@ -1,11 +1,8 @@
-from model.donate import Donate
+from service.data.donate import DonateData
 
 from view.donate import DonatePage
 from view.donate import DonateCard
 from view.shared.href import OutHref
-
-class DonateData:
-    donates: list[Donate]
 
 class DonateService:
     data: DonateData
