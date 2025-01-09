@@ -1,7 +1,7 @@
 from enum import Enum
 
 class LocalHref(Enum):
-    ROOT        = 0
+    Root        = 0
     Landing     = 1
     Product     = 2
     Contact     = 3
