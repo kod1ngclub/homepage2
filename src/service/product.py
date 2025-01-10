@@ -18,7 +18,7 @@ class ProductService:
     def __init__(self, data: ProductData) -> None:
         self.data = data
 
-    def BuildIndex(self) -> ProductPage:
+    def Build(self) -> ProductPage:
         page = ProductPage(
             filter  = Filter(
                 level   = LevelFiltered.NonFiltered,

@@ -47,7 +47,7 @@ contactserv: ContactService     = ContactService(data=contactdata)
 donateserv: DonateService       = DonateService(data=donatedata)
 
 landingpage: LandingPage        = landingserv.Build()
-productindex: ProductPage       = productserv.BuildIndex()
+productindex: ProductPage       = productserv.Build()
 productgroup: list[ProductPage] = productserv.BuildEach()
 contactpage: ContactPage        = contactserv.Build()
 donatepage: DonatePage          = donateserv.Build()
