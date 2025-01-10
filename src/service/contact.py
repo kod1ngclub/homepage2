@@ -20,31 +20,34 @@ class ContactService:
 
         # push contact-cards
         for item in self.data.contacts:
-            c = ContactCard(head="", href=OutHref(""), icon=Icon.Email)
-
-            c.head = item.name
-            c.href.to = item.href
-
+            matchedicon: Icon = Icon.Email
             match item.media:
                 case Media.Email:
-                    c.icon = Icon.Email
+                    matchedicon = Icon.Email
                 case Media.PhoneCall:
-                    c.icon = Icon.PhoneCall
+                    matchedicon = Icon.PhoneCall
                 case Media.LinkedIn:
-                    c.icon = Icon.LinkedIn
+                    matchedicon = Icon.LinkedIn
                 case Media.Discord:
-                    c.icon = Icon.Discord
+                    matchedicon = Icon.Discord
                 case Media.Facebook:
-                    c.icon = Icon.Facebook
+                    matchedicon = Icon.Facebook
                 case Media.Twiiter:
-                    c.icon = Icon.Twiiter
+                    matchedicon = Icon.Twiiter
                 case Media.Youtube:
-                    c.icon = Icon.Youtube
+                    matchedicon = Icon.Youtube
                 case Media.Blog:
-                    c.icon = Icon.Blog
+                    matchedicon = Icon.Blog
                 case Media.Github:
-                    c.icon = Icon.Github
+                    matchedicon = Icon.Github
 
-            page.contacts.append(c)
+
+            page.contacts.append(
+                ContactCard(
+                    head    = item.name,
+                    href    = OutHref(to=item.href),
+                    icon    = matchedicon
+                )
+            )
 
         return page

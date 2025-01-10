@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 
+@dataclass
 class ProductCard:
     head: str
     body: str

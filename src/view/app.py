@@ -1,7 +1,6 @@
 from view.shared.href import OutHref
 from view.shared.href import LocalHref
 
-
 from view.landing import LandingPage
 from view.product import ProductPage
 from view.contact import ContactPage

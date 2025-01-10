@@ -19,19 +19,23 @@ class ProductService:
         self.data = data
 
     def BuildIndex(self) -> ProductPage:
-        page = ProductPage(filter=Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered), cards=[])
-
-        page.filter.star        = StarFiltered.NonFiltered
-        page.filter.series      = SeriesFiltered.NonFiltered
-        page.filter.level       = LevelFiltered.NonFiltered
+        page = ProductPage(
+            filter  = Filter(
+                level   = LevelFiltered.NonFiltered,
+                series  = SeriesFiltered.NonFiltered,
+                star    = StarFiltered.NonFiltered
+            ),
+            cards   = []
+        )
 
         for item in self.data.products:
-            c = ProductCard(head="", body="", star=False)
-            c.head      = item.name
-            c.body      = item.description
-            c.star      = item.star
-
-            page.cards.append(c)
+            page.cards.append(
+                ProductCard(
+                    head    = item.name,
+                    body    = item.description,
+                    star    = item.star
+                )
+            )
 
         return page
 
@@ -79,12 +83,13 @@ class ProductService:
                     filtered = [item for item in filtered if (item.level == LevelName.Deprecated)]
 
             for item in filtered:
-                c           = ProductCard(head="", body="", star=False)
-                c.head      = item.name
-                c.body      = item.description
-                c.star      = item.star
-
-                page.cards.append(c)
+                page.cards.append(
+                    ProductCard(
+                        head    = item.name,
+                        body    = item.description,
+                        star    = item.star
+                    )
+                )
 
             pages.append(page)
 
