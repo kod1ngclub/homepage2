@@ -16,18 +16,22 @@ from view.product import ProductPage
 from view.contact import ContactPage
 from view.donate import DonatePage
 
-from view.app import App
-from view.app import ProductGroup
-from view.app import Nav
-from view.app import Foot
-from view.app import LocalItem
-from view.app import OutItem
-
 from view.shared.href import LocalHref
 from view.shared.href import OutHref
 
 # engine
-from template.interface import TemplateEngine
+from template.interface.datapage import DataPage
+from template.interface.datapage import LandingGroup
+from template.interface.datapage import ProductGroup
+from template.interface.datapage import ContactGroup
+from template.interface.datapage import DonateGroup
+
+from template.interface.datapage import Nav
+from template.interface.datapage import Foot
+from template.interface.datapage import LocalItem
+from template.interface.datapage import OutItem
+
+from template.interface.engine import TemplateEngine
 from template.test import TestTemplateEngine
 
 # ==== data-fetching
@@ -48,39 +52,47 @@ productgroup: list[ProductPage] = productserv.BuildEach()
 contactpage: ContactPage        = contactserv.Build()
 donatepage: DonatePage          = donateserv.Build()
 
-# ==== bind app
-nav: Nav = Nav(
-    items=[
-        LocalItem(text="Home", href=LocalHref.Root),
-        LocalItem(text="Product", href=LocalHref.Product),
-        LocalItem(text="Contact", href=LocalHref.Contact),
-        LocalItem(text="Donate", href=LocalHref.Donate)
-    ]
-)
+# ==== bind datapage
+page: DataPage = DataPage(
+    landing     = LandingGroup(
+        index       = landingpage,
+        group       = None
+    ),
+    product     = ProductGroup(
+        index       = productindex,
+        group       = productgroup
+    ),
+    contact     = ContactGroup(
+        index       = contactpage,
+        group       = None
+    ),
+    donate      = DonateGroup(
+        index       = donatepage,
+        group       = None
+    ),
 
-foot: Foot = Foot(
-    table=[
-        LocalItem(text="Home", href=LocalHref.Root),
-        LocalItem(text="Product", href=LocalHref.Product),
-        LocalItem(text="Contact", href=LocalHref.Contact),
-        LocalItem(text="Donate", href=LocalHref.Donate)
-    ],
-    family=[
-        OutItem(text="Google", href=OutHref(to="https://www.google.com")),
-        OutItem(text="Example", href=OutHref(to="https://www.example.com"))
-    ]
-)
-
-app: App = App(
-    landing     = landingpage,
-    product     = ProductGroup(index=productindex, group=productgroup),
-    contact     = contactpage,
-    donate      = donatepage,
-
-    nav         = nav,
-    foot        = foot
+    nav         = Nav(
+        items=[
+            LocalItem(text="Home", href=LocalHref.Root),
+            LocalItem(text="Product", href=LocalHref.Product),
+            LocalItem(text="Contact", href=LocalHref.Contact),
+            LocalItem(text="Donate", href=LocalHref.Donate)
+        ]
+    ),
+    foot        = Foot(
+        table=[
+            LocalItem(text="Home", href=LocalHref.Root),
+            LocalItem(text="Product", href=LocalHref.Product),
+            LocalItem(text="Contact", href=LocalHref.Contact),
+            LocalItem(text="Donate", href=LocalHref.Donate)
+        ],
+        family=[
+            OutItem(text="Google", href=OutHref(to="https://www.google.com")),
+            OutItem(text="Example", href=OutHref(to="https://www.example.com"))
+        ]
+    )
 )
 
 # ==== render pages (with engine)
 engine: TemplateEngine  = TestTemplateEngine()
-engine.Run(data=app)
+engine.Run(datapage=page)

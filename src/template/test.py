@@ -1,7 +1,6 @@
-from template.interface import TemplateEngine
-
-from view.app import App
+from template.interface.engine import TemplateEngine
+from template.interface.datapage import DataPage
 
 class TestTemplateEngine(TemplateEngine):
-    def Run(self, data: App) -> None:
-        print("Tada! We did something! (maybe...)")
+    def Run(self, datapage: DataPage) -> None:
+        print("I think we did something!")

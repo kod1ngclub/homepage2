@@ -8,7 +8,7 @@ from view.donate import DonatePage
 
 from dataclasses import dataclass
 
-# layout
+# ==== components
 @dataclass
 class LocalItem:
     text: str
@@ -19,6 +19,7 @@ class OutItem:
     text: str
     href: OutHref
 
+# ==== layout
 @dataclass
 class Nav:
     items: list[LocalItem]
@@ -28,19 +29,34 @@ class Foot:
     table: list[LocalItem]
     family: list[OutItem]
 
-# group
+# ==== page
+@dataclass
+class LandingGroup:
+    index: LandingPage
+    group: list[LandingPage] | None
+
 @dataclass
 class ProductGroup:
     index: ProductPage
-    group: list[ProductPage]
+    group: list[ProductPage] | None
 
-# app
 @dataclass
-class App:
-    landing: LandingPage
+class ContactGroup:
+    index: ContactPage
+    group: list[ContactPage] | None
+
+@dataclass
+class DonateGroup:
+    index: DonatePage
+    group: list[DonatePage] | None
+
+# datapage
+@dataclass
+class DataPage:
+    landing: LandingGroup
     product: ProductGroup
-    contact: ContactPage
-    donate: DonatePage
+    contact: ContactGroup
+    donate: DonateGroup
 
     nav: Nav
     foot: Foot
