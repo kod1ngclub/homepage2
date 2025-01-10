@@ -16,6 +16,6 @@ class Media(Enum):
 
 @dataclass
 class Contact:
-    name: str       = ""
-    media: Media    = Media.Email
-    href: str       = ""
+    name: str
+    media: Media
+    href: str

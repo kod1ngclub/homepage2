@@ -10,10 +10,10 @@ class LevelName(Enum):
 
 @dataclass
 class Product:
-    name: str               = ""
-    description: str        = ""
-    href: str               = ""
+    name: str
+    description: str
+    href: str
 
-    level: LevelName        = LevelName.Deprecated
-    series: SeriesName      = SeriesName.Etc
-    star: bool              = False
+    level: LevelName
+    series: SeriesName
+    star: bool

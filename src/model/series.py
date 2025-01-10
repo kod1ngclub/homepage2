@@ -8,5 +8,5 @@ class SeriesName(Enum):
 
 @dataclass
 class Series:
-    name: SeriesName    = SeriesName.Etc
-    description: str    = ""
+    name: SeriesName
+    description: str
