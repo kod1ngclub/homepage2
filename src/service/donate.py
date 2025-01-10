@@ -1,4 +1,3 @@
-from functools import _T_co
 from service.data.donate import DonateData
 
 from view.donate import DonatePage
