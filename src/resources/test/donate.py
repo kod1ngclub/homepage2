@@ -6,7 +6,11 @@ TEST_DONATES: list[Donate] = [
         href        = "https://www.buymeacoffee.com"
     ),
     Donate(
-        name        = "Kakao",
+        name        = "Donate 01",
+        href        = "https://www.example.com"
+    )
+    Donate(
+        name        = "Donate 02",
         href        = "https://www.example.com"
     )
 ]

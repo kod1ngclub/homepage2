@@ -4,17 +4,17 @@ from service.data.landing import ProductExample
 from service.data.landing import SeriesExample
 from service.data.landing import ProductImage
 
-TEST_HEAD       = "Some Team"
-TEST_BODY       = "Some Body"
+TEST_HEAD       = "Name of team"
+TEST_BODY       = "Description of team"
 
 TEST_ABOUTS: list[About] = [
     About(
-        head    = "Why we do this?",
+        head    = "About section Head 01",
         body    = "Blablabla",
         image   = AboutImage(source="https://www.example.com", alt="Example")
     ),
     About(
-        head    = "How to solve it?",
+        head    = "About section Head 02",
         body    = "Blablabla",
         image   = AboutImage(source="https://www.example.com", alt="Example")
     )
@@ -22,14 +22,14 @@ TEST_ABOUTS: list[About] = [
 
 TEST_EXAMPLE_PRODUCTS: list[ProductExample] = [
     ProductExample(
-        name            = "synote",
-        description     = ["Github-oriented sharing note", "Can use in offline"],
+        name            = "Product 01",
+        description     = ["Bla", "Blabla", "Blablabla"],
         href            = "https://www.example.com",
         image           = ProductImage(source="https://www.example.com", alt="Example")
     ),
     ProductExample(
-        name            = "hostln",
-        description     = ["Selfhost blog CMS", "Line-based document", "Portability"],
+        name            = "Product 02",
+        description     = ["Bla", "Blabla", "Blablabla"],
         href            = "https://www.example.com",
         image           = ProductImage(source="https://www.example.com", alt="Example")
     )
@@ -37,8 +37,8 @@ TEST_EXAMPLE_PRODUCTS: list[ProductExample] = [
 
 TEST_EXAMPLE_SERIESES: list[SeriesExample] = [
     SeriesExample(
-        name            = "host",
-        description     = ["Selfhost toolset", "Used in any platform"]
+        name            = "Series 01",
+        description     = ["Bla", "Blabla"]
     )
 ]
 
