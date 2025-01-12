@@ -1,4 +1,4 @@
-from service.data.landing import LandingData
+from service.data.landing import AboutImage, LandingData
 
 from view.landing import LandingPage
 from view.landing import ProductSection
@@ -30,20 +30,21 @@ class LandingService:
         )
 
         # section: jumbotron
-        page.head = "Kod1ngclub"
-        page.body = "코딩 동아리를 위한 코딩 동아리"
+        page.head = self.data.head
+        page.body = self.data.body
 
         # section: about
-        page.abouts.append(
-            AboutSection(
-                head    = "Why we do this?",
-                body    = "새 학기가 시작되고 야심찬 마음으로 코딩 동아리에 가입합니다. 첫 날부터 기술 스택 선정에 8시간을 태웠습니다. 개발자들은 C와 Python으로 나누어서 파벌 전쟁을 벌이고 있습니다. 뭐 그게 중요하겠습니까? 아무튼 프로젝트는 시작됬습니다. 기획자는 오늘도 새로운 기획안을 가져옵니다. 젠장, 기획서는 거의 뭐 카카오가 따로 없습니다. 1px만 옮겨달라는 디자이너의 울부짖음도 무시할 수는 없겠죠? 그렇게 6개월이 흐릅니다. 이런! 학기 말이 다가오지만 아무것도 이루어 진게 없습니다. 이게 몇 번째 인지 모르겠습니다.누군가가 이걸 막아줄 수는 없을까요?",
-                image   = Image(
-                    source  = "https://www.example.com",
-                    alt     = "An image with angry developers, designer requesting 1px-move and project manager only making more things-to-do"
+        for item in self.data.abouts:
+            page.abouts.append(
+                AboutSection(
+                    head    = item.head,
+                    body    = item.body,
+                    image   = Image(
+                        source  = item.image.source,
+                        alt     = item.image.alt
+                    )
                 )
             )
-        )
 
         page.abouts.append(
             AboutSection(

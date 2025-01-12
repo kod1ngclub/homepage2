@@ -40,6 +40,9 @@ from template.interface.engine import TemplateConfig
 from template.test import TestTemplateEngine
 
 # resources
+from resources.test.data import TEST_HEAD
+from resources.test.data import TEST_BODY
+from resources.test.data import TEST_ABOUTS
 from resources.test.data import TEST_EXAMPLE_PRODUCTS
 from resources.test.data import TEST_EXAMPLE_SERIESES
 from resources.test.data import TEST_GITHUB
@@ -113,6 +116,9 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
 
 Build(
     landingdata     = LandingData(
+        head        = TEST_HEAD,
+        body        = TEST_BODY,
+        abouts      = TEST_ABOUTS,
         products    = TEST_EXAMPLE_PRODUCTS,
         serieses    = TEST_EXAMPLE_SERIESES,
         github      = TEST_GITHUB,

@@ -1,6 +1,17 @@
 from dataclasses import dataclass
 
 @dataclass
+class AboutImage:
+    source: str
+    alt: str
+
+@dataclass
+class About:
+    head: str
+    body: str
+    image: AboutImage
+
+@dataclass
 class ProductImage:
     source: str
     alt: str
@@ -19,6 +30,9 @@ class SeriesExample:
 
 @dataclass
 class LandingData:
+    head: str
+    body: str
+    abouts: list[About]
     products: list[ProductExample]
     serieses: list[SeriesExample]
     github: str
