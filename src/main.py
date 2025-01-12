@@ -1,5 +1,16 @@
+# model
+from model.product import Product
+from model.product import LevelName
+from model.product import SeriesName
+from model.contact import Contact
+from model.contact import Media
+from model.donate import Donate
+
 # service - data
 from service.data.landing import LandingData
+from service.data.landing import ProductExample
+from service.data.landing import SeriesExample
+from service.data.landing import ProductImage
 from service.data.product import ProductData
 from service.data.contact import ContactData
 from service.data.donate import DonateData
@@ -33,6 +44,7 @@ from template.interface.datapage import OutItem
 
 from template.interface.engine import TemplateConfig, TemplateEngine
 from template.test import TestTemplateEngine
+from view.shared.image import Image
 
 
 def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData, path: str):
@@ -98,10 +110,86 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
 
     engine.Run(datapage=page)
 
+l: LandingData = LandingData(
+    products = [
+        ProductExample(
+            name            = "synote",
+            description     = ["Github-oriented sharing note", "Can use in offline"],
+            href            = "https://www.example.com",
+            image           = ProductImage(source="https://www.example.com", alt="Example")
+        ),
+        ProductExample(
+            name            = "hostln",
+            description     = ["Selfhost blog CMS", "Line-based document", "Portability"],
+            href            = "https://www.example.com",
+            image           = ProductImage(source="https://www.example.com", alt="Example")
+        )
+    ],
+    serieses = [
+        SeriesExample(
+            name            = "host",
+            description     = ["Selfhost toolset", "Used in any platform"]
+        )
+    ],
+    github = "https://www.example.com",
+    discord = "https://www.example.com"
+)
+
+p: ProductData = ProductData(
+    products = [
+        Product(
+            name            = "synote",
+            description     = "Github oriented sharing note used in offline",
+            href            = "https://www.example.com",
+
+            level           = LevelName.Major,
+            series          = SeriesName.Etc,
+            star            = True
+        ),
+        Product(
+            name            = "hostln",
+            description     = "Selfhost blog app",
+            href            = "https://www.example.com",
+
+            level           = LevelName.Major,
+            series          = SeriesName.Host,
+            star            = True
+        ),
+    ]
+)
+
+c: ContactData = ContactData(
+    contacts = [
+        Contact(
+            name        = "Gmail",
+            media       = Media.Email,
+            href        = "mailto:someone@example.com"
+        ),
+        Contact(
+            name        = "Discord",
+            media       = Media.Discord,
+            href        = "https://www.discord.example"
+        )
+    ]
+)
+
+d: DonateData = DonateData(
+    donates = [
+        Donate(
+            name        = "Buy me a coffee",
+            href        = "https://www.buymeacoffee.com"
+        ),
+        Donate(
+            name        = "Kakao",
+            href        = "https://www.example.com"
+        )
+    ]
+)
+
 Build(
-    landingdata     = LandingData(products=[], serieses=[], github="", discord=""),
-    productdata     = ProductData(products=[]),
-    contactdata     = ContactData(contacts=[]),
-    donatedata      = DonateData(donates=[]),
+    landingdata     = l,
+    productdata     = p,
+    contactdata     = c,
+    donatedata      = d,
     path            = "/"
 )

@@ -3,6 +3,12 @@ from template.interface.engine import TemplateConfig
 
 from template.interface.datapage import DataPage
 
+def NEWLINE() -> None:
+    print()
+
+def SECTION(name: str) -> None:
+    print("====", name)
+
 def DELI(valname: str) -> str:
     return valname + ":"
 
@@ -14,12 +20,6 @@ def FIELD3(p: str, c1: str, c2: str) -> str:
 
 def INDEX(arrname: str, index: int) -> str:
     return arrname + "[" + str(index) + "]"
-
-def NEWLINE() -> None:
-    print()
-
-def SECTION(name: str) -> None:
-    print("====", name)
 
 class TestTemplateEngine(TemplateEngine):
     config: TemplateConfig = TemplateConfig("")
@@ -91,7 +91,7 @@ class TestTemplateEngine(TemplateEngine):
             print(DELI(FIELD2(INDEX(FIELD2("product", "cards"), index), "star")), item.star)
 
         NEWLINE()
-        SECTION("product - group")
+        print(product.group)
 
         if product.group == None:
             print("'ProductPage' should have 'group'")
