@@ -91,7 +91,6 @@ class TestTemplateEngine(TemplateEngine):
             print(DELI(FIELD2(INDEX(FIELD2("product", "cards"), index), "star")), item.star)
 
         NEWLINE()
-        print(product.group)
 
         if product.group == None:
             print("'ProductPage' should have 'group'")

@@ -48,16 +48,15 @@ class ProductService:
         for starcond in starconds:
             for seriescond in seriesconds:
                 for levelcond in levelconds:
-                    filtercond          = Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered)
-                    filtercond.star     = starcond
-                    filtercond.series   = seriescond
-                    filtercond.level    = levelcond
+                    filterconds.append(Filter(
+                        star        = starcond,
+                        series      = seriescond,
+                        level       = levelcond
+                    ))
 
         pages: list[ProductPage] = []
         for filtercond in filterconds:
-            page = ProductPage(filter=Filter(level=LevelFiltered.NonFiltered, series=SeriesFiltered.NonFiltered, star=StarFiltered.NonFiltered), cards=[])
-
-            page.filter = filtercond
+            page = ProductPage(filter=filtercond, cards=[])
 
             filtered: list[Product] = self.data.products
             match filtercond.star:
