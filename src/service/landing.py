@@ -46,17 +46,6 @@ class LandingService:
                 )
             )
 
-        page.abouts.append(
-            AboutSection(
-                head    = "How to solve it?",
-                body    = "이미 많은 경험이 있는 개발자들이 기술 스택을 대신 정해준다면 어떨까요? 기획과 협업을 위한 교육과 프로젝트 툴은 어떨까요? 디자이너들이 더 개발자 입장에서 사고할 수 있다면 이 문제가 해결되지 않을까요? 그래서 Kod1ngclub은 저희의 서비스를 해결책으로 제시합니다.우리의 툴과 코드는 완전히 무료이며, 라이센스를 준수한다면 일절 개입하지 않습니다.고민 없이 적용하고 성취해 내세요. 두 번째 Kod1ngclub의 등장이 Kod1ngclub의 목표입니다.",
-                image   = Image(
-                    source  = "https://www.example.com",
-                    alt     = "A question mark image"
-                )
-            )
-        )
-
         # section: products
         for item in self.data.products:
             page.products.append(ProductSection(
