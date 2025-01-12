@@ -1,4 +1,6 @@
 from template.interface.engine import TemplateEngine
+from template.interface.engine import TemplateConfig
+
 from template.interface.datapage import DataPage
 
 def DELI(valname: str) -> str:
@@ -20,6 +22,15 @@ def SECTION(name: str) -> None:
     print("====", name)
 
 class TestTemplateEngine(TemplateEngine):
+    config: TemplateConfig = TemplateConfig("")
+    configed: bool = False
+
+    def Init(self, config: TemplateConfig) -> None:
+        if self.configed: return
+
+        self.config = config
+        self.configed = True
+
     def Run(self, datapage: DataPage) -> None:
         nav         = datapage.nav
         foot        = datapage.foot
@@ -28,6 +39,9 @@ class TestTemplateEngine(TemplateEngine):
         product     = datapage.product
         contact     = datapage.contact
         donate      = datapage.donate
+
+        SECTION("config")
+        print(DELI(FIELD2("config", "path")), self.config.path)
 
         SECTION("nav")
 
@@ -94,6 +108,8 @@ class TestTemplateEngine(TemplateEngine):
                 print(DELI(FIELD2(INDEX(FIELD2(PROD, "cards"), index), "head")), item.head)
                 print(DELI(FIELD2(INDEX(FIELD2(PROD, "cards"), index), "body")), item.body)
                 print(DELI(FIELD2(INDEX(FIELD2(PROD, "cards"), index), "star")), item.star)
+
+            NEWLINE()
 
 
         NEWLINE()
