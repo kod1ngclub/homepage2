@@ -31,11 +31,11 @@ from template.interface.datapage import Foot
 from template.interface.datapage import LocalItem
 from template.interface.datapage import OutItem
 
-from template.interface.engine import TemplateEngine
+from template.interface.engine import TemplateConfig, TemplateEngine
 from template.test import TestTemplateEngine
 
 
-def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData):
+def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData, path: str):
     # Init service
     landingserv: LandingService         = LandingService(data=landingdata)
     productserv: ProductService         = ProductService(data=productdata)
@@ -91,12 +91,17 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
     )
 
     # Render with engine
-    engine: TemplateEngine  = TestTemplateEngine()
+    engine: TemplateEngine = TestTemplateEngine()
+    engine.Init(TemplateConfig(
+        path = path
+    ))
+
     engine.Run(datapage=page)
 
 Build(
     landingdata     = LandingData(products=[], serieses=[], github="", discord=""),
     productdata     = ProductData(products=[]),
     contactdata     = ContactData(contacts=[]),
-    donatedata      = DonateData(donates=[])
+    donatedata      = DonateData(donates=[]),
+    path            = "/"
 )
