@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class TemplateConfig:
+    debug: bool
     path: str
 
 class TemplateEngine(ABC):

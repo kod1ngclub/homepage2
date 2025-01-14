@@ -112,7 +112,7 @@ class JinjaJSON:
     sitemap: SitemapJSON
 
 class JinjaTemplateEngine(TemplateEngine):
-    __config__: TemplateConfig      = TemplateConfig("")
+    __config__: TemplateConfig      = TemplateConfig(path="", debug=True)
     __configed__: bool              = False
 
     __jinja__: JinjaConfig
@@ -241,5 +241,7 @@ class JinjaTemplateEngine(TemplateEngine):
         print(donatehtml)
         print("==================================")
         for item in producthtmls: print(item)
+
+        print("Should make debug print for JinjaTemplateEngine")
 
         print("We run JinjaTemplateEngine")

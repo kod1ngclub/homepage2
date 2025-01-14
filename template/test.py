@@ -22,7 +22,7 @@ def INDEX(arrname: str, index: int) -> str:
     return arrname + "[" + str(index) + "]"
 
 class TestTemplateEngine(TemplateEngine):
-    __config__: TemplateConfig      = TemplateConfig("")
+    __config__: TemplateConfig      = TemplateConfig(path="", debug=True)
     __configed__: bool              = False
 
     def Init(self, config: TemplateConfig) -> None:
@@ -42,6 +42,7 @@ class TestTemplateEngine(TemplateEngine):
 
         SECTION("config")
         print(DELI(FIELD2("config", "path")), self.__config__.path)
+        print(DELI(FIELD2("config", "debug")), self.__config__.debug)
 
         SECTION("nav")
 
