@@ -114,12 +114,20 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
     # Render with engine
     engine.Run(datapage=page)
 
-RESOURCES_TEMPLATE: Path                = Path.cwd().joinpath("resources").joinpath("template")
-RESOURCES_TEMPLATE_LAYOUT: Path         = RESOURCES_TEMPLATE.joinpath("layout.html")
-RESOURCES_TEMPLATE_LANDING: Path        = RESOURCES_TEMPLATE.joinpath("landing.html")
-RESOURCES_TEMPLATE_PRODUCT: Path        = RESOURCES_TEMPLATE.joinpath("product.html")
-RESOURCES_TEMPLATE_CONTACT: Path        = RESOURCES_TEMPLATE.joinpath("contact.html")
-RESOURCES_TEMPLATE_DONATE: Path         = RESOURCES_TEMPLATE.joinpath("donate.html")
+WORD_RESOURCES: str         = "resources"
+WORD_TEMPLATE: str          = "template"
+WORD_LAYOUT: str            = "layout.html"
+WORD_LANDING: str           = "landing.html"
+WORD_PRODUCT: str           = "product.html"
+WORD_CONTACT: str           = "contact.html"
+WORD_DONATE: str            = "donate.html"
+
+RESOURCES_TEMPLATE: Path                = Path.cwd().joinpath(WORD_RESOURCES).joinpath(WORD_TEMPLATE)
+RESOURCES_TEMPLATE_LAYOUT: Path         = RESOURCES_TEMPLATE.joinpath(WORD_LAYOUT)
+RESOURCES_TEMPLATE_LANDING: Path        = RESOURCES_TEMPLATE.joinpath(WORD_LANDING)
+RESOURCES_TEMPLATE_PRODUCT: Path        = RESOURCES_TEMPLATE.joinpath(WORD_PRODUCT)
+RESOURCES_TEMPLATE_CONTACT: Path        = RESOURCES_TEMPLATE.joinpath(WORD_CONTACT)
+RESOURCES_TEMPLATE_DONATE: Path         = RESOURCES_TEMPLATE.joinpath(WORD_DONATE)
 
 def FAIL_TO_FIND(path: Path): return (not path.exists())
 
@@ -131,10 +139,11 @@ if FAIL_TO_FIND(RESOURCES_TEMPLATE_CONTACT):    raise Exception(f"Fielpath {str(
 if FAIL_TO_FIND(RESOURCES_TEMPLATE_DONATE):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_DONATE)} not exist")
 
 engine: TemplateEngine = HTMLTemplateEngine(
-    landingpath     = str(RESOURCES_TEMPLATE_LANDING),
-    productpath     = str(RESOURCES_TEMPLATE_PRODUCT),
-    contactpath     = str(RESOURCES_TEMPLATE_CONTACT),
-    donatepath      = str(RESOURCES_TEMPLATE_DONATE)
+    templateroot    = str(RESOURCES_TEMPLATE),
+    landingfile     = WORD_LANDING,
+    productfile     = WORD_PRODUCT,
+    contactfile     = WORD_CONTACT,
+    donatefile      = WORD_DONATE
 )
 engine.Init(TemplateConfig(path = "/"))
 

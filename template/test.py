@@ -92,9 +92,7 @@ class TestTemplateEngine(TemplateEngine):
 
         NEWLINE()
 
-        if product.group == None:
-            print("'ProductPage' should have 'group'")
-            return
+        if product.group == None: raise Exception("'ProductPage' should have 'group'")
 
         for prodindex, proditem in enumerate(product.group):
             PROD = INDEX(FIELD2("product", "group"), prodindex)
