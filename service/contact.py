@@ -8,10 +8,10 @@ from view.contact import Icon
 from view.shared.href import OutHref
 
 class ContactService:
-    data: ContactData
+    __data__: ContactData
 
     def __init__(self, data: ContactData) -> None:
-        self.data = data
+        self.__data__ = data
 
     def Build(self) -> ContactPage:
         page = ContactPage(
@@ -19,7 +19,7 @@ class ContactService:
         )
 
         # push contact-cards
-        for item in self.data.contacts:
+        for item in self.__data__.contacts:
             matchedicon: Icon = Icon.Email
             match item.media:
                 case Media.Email:

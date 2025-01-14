@@ -13,10 +13,10 @@ from view.product import LevelFiltered
 
 
 class ProductService:
-    data: ProductData
+    __data__: ProductData
 
     def __init__(self, data: ProductData) -> None:
-        self.data = data
+        self.__data__ = data
 
     def Build(self) -> ProductPage:
         page = ProductPage(
@@ -28,7 +28,7 @@ class ProductService:
             cards   = []
         )
 
-        for item in self.data.products:
+        for item in self.__data__.products:
             page.cards.append(
                 ProductCard(
                     head    = item.name,
@@ -58,7 +58,7 @@ class ProductService:
         for filtercond in filterconds:
             page = ProductPage(filter=filtercond, cards=[])
 
-            filtered: list[Product] = self.data.products
+            filtered: list[Product] = self.__data__.products
             match filtercond.star:
                 case StarFiltered.Star:
                     filtered = [item for item in filtered if (item.star == True)]

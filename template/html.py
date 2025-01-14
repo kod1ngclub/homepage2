@@ -11,35 +11,35 @@ from jinja2 import Template
 from dataclasses import asdict
 
 class HTMLTemplateEngine(TemplateEngine):
-    config: TemplateConfig      = TemplateConfig("")
-    configed: bool              = False
+    __config__: TemplateConfig      = TemplateConfig("")
+    __configed__: bool              = False
 
-    templateroot: str           = ""
-    landingfile: str            = ""
-    productfile: str            = ""
-    contactfile: str            = ""
-    donatefile: str             = ""
+    __templateroot__: str           = ""
+    __landingfile__: str            = ""
+    __productfile__: str            = ""
+    __contactfile__: str            = ""
+    __donatefile__: str             = ""
 
     def __init__(self, templateroot: str, landingfile: str, productfile: str, contactfile: str, donatefile: str) -> None:
-        self.templateroot   = templateroot
-        self.landingfile    = landingfile
-        self.productfile    = productfile
-        self.contactfile    = contactfile
-        self.donatefile     = donatefile
+        self.__templateroot__   = templateroot
+        self.__landingfile__    = landingfile
+        self.__productfile__    = productfile
+        self.__contactfile__    = contactfile
+        self.__donatefile__     = donatefile
 
     def Init(self, config: TemplateConfig) -> None:
-        if self.configed: return
+        if self.__configed__: return
 
-        self.config         = config
-        self.configed       = True
+        self.__config__         = config
+        self.__configed__       = True
 
     def Run(self, datapage: DataPage) -> None:
-        env: Environment            = Environment(loader=FileSystemLoader(self.templateroot))
+        env: Environment            = Environment(loader=FileSystemLoader(self.__templateroot__))
 
-        landingtemp: Template       = env.get_template(self.landingfile)
-        producttemp: Template       = env.get_template(self.productfile)
-        contacttemp: Template       = env.get_template(self.contactfile)
-        donatetemp: Template        = env.get_template(self.donatefile)
+        landingtemp: Template       = env.get_template(self.__landingfile__)
+        producttemp: Template       = env.get_template(self.__productfile__)
+        contacttemp: Template       = env.get_template(self.__contactfile__)
+        donatetemp: Template        = env.get_template(self.__donatefile__)
 
         normjson = {
             'nav':          asdict(datapage.nav),

@@ -22,14 +22,14 @@ def INDEX(arrname: str, index: int) -> str:
     return arrname + "[" + str(index) + "]"
 
 class TestTemplateEngine(TemplateEngine):
-    config: TemplateConfig      = TemplateConfig("")
-    configed: bool              = False
+    __config__: TemplateConfig      = TemplateConfig("")
+    __configed__: bool              = False
 
     def Init(self, config: TemplateConfig) -> None:
-        if self.configed: return
+        if self.__configed__: return
 
-        self.config         = config
-        self.configed       = True
+        self.__config__         = config
+        self.__configed__       = True
 
     def Run(self, datapage: DataPage) -> None:
         nav         = datapage.nav
@@ -41,7 +41,7 @@ class TestTemplateEngine(TemplateEngine):
         donate      = datapage.donate
 
         SECTION("config")
-        print(DELI(FIELD2("config", "path")), self.config.path)
+        print(DELI(FIELD2("config", "path")), self.__config__.path)
 
         SECTION("nav")
 

@@ -5,20 +5,20 @@ from view.donate import DonateCard
 from view.shared.href import OutHref
 
 class DonateService:
-    data: DonateData
+    __data__: DonateData
 
     def __init__(self, data) -> None:
-        self.data = data
+        self.__data__ = data
 
     def Build(self) -> DonatePage:
         page = DonatePage(main=DonateCard(head="", href=OutHref("")), subs=[])
 
         page.main = DonateCard(
-            head    = self.data.donates[0].name,
-            href    = OutHref(to=self.data.donates[0].href)
+            head    = self.__data__.donates[0].name,
+            href    = OutHref(to=self.__data__.donates[0].href)
         )
 
-        for item in self.data.donates[:1]:
+        for item in self.__data__.donates[:1]:
             page.subs.append(
                 DonateCard(
                     head    = item.name,

@@ -11,10 +11,10 @@ from view.shared.href import OutHref
 from view.shared.href import LocalHref
 
 class LandingService:
-    data: LandingData
+    __data__: LandingData
 
     def __init__(self, data: LandingData) -> None:
-        self.data = data
+        self.__data__ = data
 
     def Build(self) -> LandingPage:
         page = LandingPage(
@@ -30,11 +30,11 @@ class LandingService:
         )
 
         # section: jumbotron
-        page.head = self.data.head
-        page.body = self.data.body
+        page.head = self.__data__.head
+        page.body = self.__data__.body
 
         # section: about
-        for item in self.data.abouts:
+        for item in self.__data__.abouts:
             page.abouts.append(
                 AboutSection(
                     head    = item.head,
@@ -47,7 +47,7 @@ class LandingService:
             )
 
         # section: products
-        for item in self.data.products:
+        for item in self.__data__.products:
             page.products.append(ProductSection(
                 head    = item.name,
                 body    = item.description,
@@ -62,7 +62,7 @@ class LandingService:
             ))
 
         # section: serieses
-        for item in self.data.serieses:
+        for item in self.__data__.serieses:
             page.serieses.append(SeriesSection(
                 head    = item.name,
                 body    = item.description
@@ -74,14 +74,14 @@ class LandingService:
         page.foot.buttons.append(
             Button(
                 text    = "Our Github",
-                href    = OutHref(to=self.data.github)
+                href    = OutHref(to=self.__data__.github)
             )
         )
 
         page.foot.buttons.append(
             Button(
                 text    = "Join us in Discord",
-                href    = OutHref(to=self.data.discord)
+                href    = OutHref(to=self.__data__.discord)
             )
         )
 
