@@ -22,14 +22,14 @@ def INDEX(arrname: str, index: int) -> str:
     return arrname + "[" + str(index) + "]"
 
 class TestTemplateEngine(TemplateEngine):
-    config: TemplateConfig = TemplateConfig("")
-    configed: bool = False
+    config: TemplateConfig      = TemplateConfig("")
+    configed: bool              = False
 
     def Init(self, config: TemplateConfig) -> None:
         if self.configed: return
 
-        self.config = config
-        self.configed = True
+        self.config         = config
+        self.configed       = True
 
     def Run(self, datapage: DataPage) -> None:
         nav         = datapage.nav
