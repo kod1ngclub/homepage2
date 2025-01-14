@@ -51,6 +51,9 @@ from resources.test.product import TEST_PRODUCTS
 from resources.test.contact import TEST_CONTACTS
 from resources.test.donate import TEST_DONATES
 
+# lib
+from pathlib import Path
+
 def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData, path: str):
     # Init service
     landingserv: LandingService         = LandingService(data=landingdata)
@@ -113,6 +116,25 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
     ))
 
     engine.Run(datapage=page)
+
+# resources
+RESOURCES                       = Path.cwd().joinpath("resources")
+if not RESOURCES.exists():      raise  Exception("Directory 'reousrces' not exists")
+
+# resources - jinja2 template
+RESOURCES_TEMPLATE              = RESOURCES.joinpath("reousrces").joinpath("template")
+RESOURCES_TEMPLATE_LAYOUT       = RESOURCES_TEMPLATE.joinpath("layout.html")
+RESOURCES_TEMPLATE_LANDING      = RESOURCES_TEMPLATE.joinpath("landing.html")
+RESOURCES_TEMPLATE_PRODUCT      = RESOURCES_TEMPLATE.joinpath("product.html")
+RESOURCES_TEMPLATE_CONTACT      = RESOURCES_TEMPLATE.joinpath("contact.html")
+RESOURCES_TEMPLATE_DONATE       = RESOURCES_TEMPLATE.joinpath("doante.html")
+
+if not RESOURCES_TEMPLATE.exists():             raise  Exception("Directory 'reousrces/template' not exists")
+if not RESOURCES_TEMPLATE_LAYOUT.exists():      raise  Exception("Directory 'reousrces/template/layout.html' not exists")
+if not RESOURCES_TEMPLATE_LANDING.exists():     raise  Exception("Directory 'reousrces/template/landing.html' not exists")
+if not RESOURCES_TEMPLATE_CONTACT.exists():     raise  Exception("Directory 'reousrces/template/contact.html' not exists")
+if not RESOURCES_TEMPLATE_PRODUCT.exists():     raise  Exception("Directory 'reousrces/template/product.html' not exists")
+if not RESOURCES_TEMPLATE_DONATE.exists():      raise  Exception("Directory 'reousrces/template/donate.html' not exists")
 
 Build(
     landingdata     = LandingData(
