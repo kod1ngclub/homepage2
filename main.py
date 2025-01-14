@@ -14,6 +14,7 @@ from service.contact import ContactService
 from service.donate import DonateService
 
 # view-model
+from template.html import HTMLTemplateEngine
 from view.landing import LandingPage
 from view.product import ProductPage
 from view.contact import ContactPage
@@ -38,6 +39,7 @@ from template.interface.datapage import OutItem
 from template.interface.engine import TemplateEngine
 from template.interface.engine import TemplateConfig
 from template.test import TestTemplateEngine
+from template.html import HTMLTemplateEngine
 
 # resources
 from resources.test.data import TEST_HEAD
@@ -54,7 +56,7 @@ from resources.test.donate import TEST_DONATES
 # lib
 from pathlib import Path
 
-def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData, path: str):
+def Build(landingdata: LandingData, productdata: ProductData, contactdata: ContactData, donatedata: DonateData, engine: TemplateEngine):
     # Init service
     landingserv: LandingService         = LandingService(data=landingdata)
     productserv: ProductService         = ProductService(data=productdata)
@@ -110,31 +112,31 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
     )
 
     # Render with engine
-    engine: TemplateEngine = TestTemplateEngine()
-    engine.Init(TemplateConfig(
-        path = path
-    ))
-
     engine.Run(datapage=page)
 
-# resources
-RESOURCES                       = Path.cwd().joinpath("resources")
-if not RESOURCES.exists():      raise  Exception("Directory 'reousrces' not exists")
+RESOURCES_TEMPLATE: Path                = Path.cwd().joinpath("resources").joinpath("template")
+RESOURCES_TEMPLATE_LAYOUT: Path         = RESOURCES_TEMPLATE.joinpath("layout.html")
+RESOURCES_TEMPLATE_LANDING: Path        = RESOURCES_TEMPLATE.joinpath("landing.html")
+RESOURCES_TEMPLATE_PRODUCT: Path        = RESOURCES_TEMPLATE.joinpath("product.html")
+RESOURCES_TEMPLATE_CONTACT: Path        = RESOURCES_TEMPLATE.joinpath("contact.html")
+RESOURCES_TEMPLATE_DONATE: Path         = RESOURCES_TEMPLATE.joinpath("donate.html")
 
-# resources - jinja2 template
-RESOURCES_TEMPLATE              = RESOURCES.joinpath("reousrces").joinpath("template")
-RESOURCES_TEMPLATE_LAYOUT       = RESOURCES_TEMPLATE.joinpath("layout.html")
-RESOURCES_TEMPLATE_LANDING      = RESOURCES_TEMPLATE.joinpath("landing.html")
-RESOURCES_TEMPLATE_PRODUCT      = RESOURCES_TEMPLATE.joinpath("product.html")
-RESOURCES_TEMPLATE_CONTACT      = RESOURCES_TEMPLATE.joinpath("contact.html")
-RESOURCES_TEMPLATE_DONATE       = RESOURCES_TEMPLATE.joinpath("doante.html")
+def FAIL_TO_FIND(path: Path): return (not path.exists())
 
-if not RESOURCES_TEMPLATE.exists():             raise  Exception("Directory 'reousrces/template' not exists")
-if not RESOURCES_TEMPLATE_LAYOUT.exists():      raise  Exception("Directory 'reousrces/template/layout.html' not exists")
-if not RESOURCES_TEMPLATE_LANDING.exists():     raise  Exception("Directory 'reousrces/template/landing.html' not exists")
-if not RESOURCES_TEMPLATE_CONTACT.exists():     raise  Exception("Directory 'reousrces/template/contact.html' not exists")
-if not RESOURCES_TEMPLATE_PRODUCT.exists():     raise  Exception("Directory 'reousrces/template/product.html' not exists")
-if not RESOURCES_TEMPLATE_DONATE.exists():      raise  Exception("Directory 'reousrces/template/donate.html' not exists")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE):            raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_LAYOUT):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_LAYOUT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_LANDING):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_LANDING)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_PRODUCT):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_PRODUCT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_CONTACT):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_CONTACT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_DONATE):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_DONATE)} not exist")
+
+engine: TemplateEngine = HTMLTemplateEngine(
+    landingpath     = str(RESOURCES_TEMPLATE_LANDING),
+    productpath     = str(RESOURCES_TEMPLATE_PRODUCT),
+    contactpath     = str(RESOURCES_TEMPLATE_CONTACT),
+    donatepath      = str(RESOURCES_TEMPLATE_DONATE)
+)
+engine.Init(TemplateConfig(path = "/"))
 
 Build(
     landingdata     = LandingData(
@@ -149,5 +151,5 @@ Build(
     productdata     = ProductData(products=TEST_PRODUCTS),
     contactdata     = ContactData(contacts=TEST_CONTACTS),
     donatedata      = DonateData(donates=TEST_DONATES),
-    path            = "/"
+    engine          = engine
 )
