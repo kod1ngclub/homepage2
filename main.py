@@ -14,7 +14,6 @@ from service.contact import ContactService
 from service.donate import DonateService
 
 # view-model
-from template.html import HTMLTemplateEngine
 from view.landing import LandingPage
 from view.product import ProductPage
 from view.contact import ContactPage
@@ -38,8 +37,10 @@ from template.interface.datapage import OutItem
 
 from template.interface.engine import TemplateEngine
 from template.interface.engine import TemplateConfig
-from template.test import TestTemplateEngine
-from template.html import HTMLTemplateEngine
+
+from template.jinja import JinjaTemplateEngine
+from template.jinja import JinjaConfig
+from template.jinja import SitemapIndexConfig
 
 # resources
 from resources.test.data import TEST_HEAD
@@ -138,12 +139,21 @@ if FAIL_TO_FIND(RESOURCES_TEMPLATE_PRODUCT):    raise Exception(f"Fielpath {str(
 if FAIL_TO_FIND(RESOURCES_TEMPLATE_CONTACT):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_CONTACT)} not exist")
 if FAIL_TO_FIND(RESOURCES_TEMPLATE_DONATE):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_DONATE)} not exist")
 
-engine: TemplateEngine = HTMLTemplateEngine(
-    templateroot    = str(RESOURCES_TEMPLATE),
-    landingfile     = WORD_LANDING,
-    productfile     = WORD_PRODUCT,
-    contactfile     = WORD_CONTACT,
-    donatefile      = WORD_DONATE
+engine: TemplateEngine = JinjaTemplateEngine(
+    jinja = JinjaConfig(
+        root        = str(RESOURCES_TEMPLATE),
+        landing     = WORD_LANDING,
+        product     = WORD_PRODUCT,
+        contact     = WORD_CONTACT,
+        donate      = WORD_DONATE
+    ),
+    sitemap = SitemapIndexConfig(
+        root        = "https://www.example.com",
+        landing     = None,
+        product     = "product",
+        contact     = "contact",
+        donate      = "donate"
+    )
 )
 engine.Init(TemplateConfig(path = "/"))
 
