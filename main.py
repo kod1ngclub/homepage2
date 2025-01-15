@@ -115,6 +115,7 @@ def Build(landingdata: LandingData, productdata: ProductData, contactdata: Conta
     # Render with engine
     engine.Run(datapage=page)
 
+# template filepath words
 WORD_RESOURCES: str         = "resources"
 WORD_TEMPLATE: str          = "template"
 WORD_LAYOUT: str            = "layout.html"
@@ -123,6 +124,7 @@ WORD_PRODUCT: str           = "product.html"
 WORD_CONTACT: str           = "contact.html"
 WORD_DONATE: str            = "donate.html"
 
+# define filepaths as 'Path'
 RESOURCES_TEMPLATE: Path                = Path.cwd().joinpath(WORD_RESOURCES).joinpath(WORD_TEMPLATE)
 RESOURCES_TEMPLATE_LAYOUT: Path         = RESOURCES_TEMPLATE.joinpath(WORD_LAYOUT)
 RESOURCES_TEMPLATE_LANDING: Path        = RESOURCES_TEMPLATE.joinpath(WORD_LANDING)
@@ -130,18 +132,20 @@ RESOURCES_TEMPLATE_PRODUCT: Path        = RESOURCES_TEMPLATE.joinpath(WORD_PRODU
 RESOURCES_TEMPLATE_CONTACT: Path        = RESOURCES_TEMPLATE.joinpath(WORD_CONTACT)
 RESOURCES_TEMPLATE_DONATE: Path         = RESOURCES_TEMPLATE.joinpath(WORD_DONATE)
 
+# check usable
 def FAIL_TO_FIND(path: Path): return (not path.exists())
+def TO_FILEPATH(path: Path): return str(path)
 
-if FAIL_TO_FIND(RESOURCES_TEMPLATE):            raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE)} not exist")
-if FAIL_TO_FIND(RESOURCES_TEMPLATE_LAYOUT):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_LAYOUT)} not exist")
-if FAIL_TO_FIND(RESOURCES_TEMPLATE_LANDING):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_LANDING)} not exist")
-if FAIL_TO_FIND(RESOURCES_TEMPLATE_PRODUCT):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_PRODUCT)} not exist")
-if FAIL_TO_FIND(RESOURCES_TEMPLATE_CONTACT):    raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_CONTACT)} not exist")
-if FAIL_TO_FIND(RESOURCES_TEMPLATE_DONATE):     raise Exception(f"Fielpath {str(RESOURCES_TEMPLATE_DONATE)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE):            raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_LAYOUT):     raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_LAYOUT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_LANDING):    raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_LANDING)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_PRODUCT):    raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_PRODUCT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_CONTACT):    raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_CONTACT)} not exist")
+if FAIL_TO_FIND(RESOURCES_TEMPLATE_DONATE):     raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_DONATE)} not exist")
 
 engine: TemplateEngine = JinjaTemplateEngine(
     jinja = JinjaConfig(
-        root        = str(RESOURCES_TEMPLATE),
+        root        = TO_FILEPATH(RESOURCES_TEMPLATE),
         landing     = WORD_LANDING,
         product     = WORD_PRODUCT,
         contact     = WORD_CONTACT,
@@ -155,7 +159,7 @@ engine: TemplateEngine = JinjaTemplateEngine(
         donate      = "donate"
     )
 )
-engine.Init(TemplateConfig(path = "/"))
+engine.Init(TemplateConfig(path="/build", debug=True))
 
 Build(
     landingdata     = LandingData(
