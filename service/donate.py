@@ -1,3 +1,4 @@
+from resources.test import data
 from service.data.donate import DonateData
 
 from view.donate import DonatePage
@@ -13,12 +14,15 @@ class DonateService:
     def Build(self) -> DonatePage:
         page = DonatePage(main=DonateCard(head="", href=OutHref("")), subs=[])
 
+        HEAD = self.__data__.donates[0]
+        TAIL = self.__data__.donates[:1]
+
         page.main = DonateCard(
-            head    = self.__data__.donates[0].name,
-            href    = OutHref(to=self.__data__.donates[0].href)
+            head    = HEAD.name,
+            href    = OutHref(to=HEAD.href)
         )
 
-        for item in self.__data__.donates[:1]:
+        for item in TAIL:
             page.subs.append(
                 DonateCard(
                     head    = item.name,

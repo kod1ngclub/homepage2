@@ -5,7 +5,8 @@ from view.landing import ProductSection
 from view.landing import SeriesSection
 from view.landing import AboutSection
 from view.landing import FootSection
-from view.shared.button import Button, OutButton
+from view.shared.button import Button
+from view.shared.button import OutButton
 from view.shared.image import Image
 from view.shared.href import OutHref
 from view.shared.href import LocalHref
@@ -18,24 +19,10 @@ class LandingService:
 
     def Build(self) -> LandingPage:
         page = LandingPage(
-            head        = "",
-            body        = "",
-            abouts      = [],
-            products    = [],
-            serieses    = [],
-            foot        = FootSection(
-                head        = "",
-                buttons     = []
-            )
-        )
+            head        = self.__data__.head,
+            body        = self.__data__.body,
 
-        # section: jumbotron
-        page.head = self.__data__.head
-        page.body = self.__data__.body
-
-        # section: about
-        for item in self.__data__.abouts:
-            page.abouts.append(
+            abouts      = [
                 AboutSection(
                     head    = item.head,
                     body    = item.body,
@@ -43,52 +30,45 @@ class LandingService:
                         source  = item.image.source,
                         alt     = item.image.alt
                     )
-                )
-            )
+                ) for item in self.__data__.abouts
+            ],
+            products    = [
+                ProductSection(
+                    head    = item.name,
+                    body    = item.description,
+                    button  = OutButton(
+                        href    = OutHref(to=item.href),
+                        text    = "More"
+                    ),
+                    image   = Image(
+                        source  = item.image.source,
+                        alt     = item.image.alt
+                    )
+                ) for item in self.__data__.products
+            ],
+            serieses    = [
+                SeriesSection(
+                    head    = item.name,
+                    body    = item.description
+                ) for item in self.__data__.serieses
+            ],
 
-        # section: products
-        for item in self.__data__.products:
-            page.products.append(ProductSection(
-                head    = item.name,
-                body    = item.description,
-                button  = OutButton(
-                    href    = OutHref(to=item.href),
-                    text    = "More"
-                ),
-                image   = Image(
-                    source  = item.image.source,
-                    alt     = item.image.alt
-                )
-            ))
-
-        # section: serieses
-        for item in self.__data__.serieses:
-            page.serieses.append(SeriesSection(
-                head    = item.name,
-                body    = item.description
-            ))
-
-        # section: foot
-        page.foot.head = "Build something wonderful with us!"
-
-        page.foot.buttons.append(
-            Button(
-                text    = "Our Github",
-                href    = OutHref(to=self.__data__.github)
-            )
-        )
-
-        page.foot.buttons.append(
-            Button(
-                text    = "Join us in Discord",
-                href    = OutHref(to=self.__data__.discord)
-            )
-        )
-
-        page.foot.buttons.append(
-            Button(
-                text    = "More products",
-                href    = LocalHref.Product
+            foot        = FootSection(
+                head        = "Build something wonderful with us!",
+                buttons     = [
+                    Button(
+                        text    = "Our Github",
+                        href    = OutHref(to=self.__data__.github)
+                    ),
+                    Button(
+                        text    = "Join us in Discord",
+                        href    = OutHref(to=self.__data__.discord)
+                    ),
+                    Button(
+                        text    = "More products",
+                        href    = LocalHref.Product
+                    )
+                ]
             )
         )
 

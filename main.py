@@ -133,8 +133,8 @@ RESOURCES_TEMPLATE_CONTACT: Path        = RESOURCES_TEMPLATE.joinpath(WORD_CONTA
 RESOURCES_TEMPLATE_DONATE: Path         = RESOURCES_TEMPLATE.joinpath(WORD_DONATE)
 
 # check usable
-def FAIL_TO_FIND(path: Path): return (not path.exists())
-def TO_FILEPATH(path: Path): return str(path)
+def FAIL_TO_FIND(path: Path):   return (not path.exists())
+def TO_FILEPATH(path: Path):    return str(path)
 
 if FAIL_TO_FIND(RESOURCES_TEMPLATE):            raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE)} not exist")
 if FAIL_TO_FIND(RESOURCES_TEMPLATE_LAYOUT):     raise Exception(f"Fielpath {TO_FILEPATH(RESOURCES_TEMPLATE_LAYOUT)} not exist")
@@ -159,7 +159,12 @@ engine: TemplateEngine = JinjaTemplateEngine(
         donate      = "donate"
     )
 )
-engine.Init(TemplateConfig(path="/build", debug=True))
+engine.Init(
+    TemplateConfig(
+        path        = "/build",
+        debug       = True
+    )
+)
 
 Build(
     landingdata     = LandingData(

@@ -14,9 +14,7 @@ class ContactService:
         self.__data__ = data
 
     def Build(self) -> ContactPage:
-        page = ContactPage(
-            contacts=[]
-        )
+        page = ContactPage(contacts=[])
 
         # push contact-cards
         for item in self.__data__.contacts:
