@@ -1,0 +1,61 @@
+{% macro nav(text, href, items, dropdowns) %}
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ href }}">{{ text }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            {% for item in items %}
+                {{ navitem(item.text, item.href) }}
+            {% endfor %}
+
+            {% for dropdown in dropdowns %}
+                {{ navdropdown(dropdown.text, dropdown.href, dropdown.items) }}
+            {% endfor %}
+        </ul>
+    </nav>
+{% endmacro %}
+
+{% macro navitem(text, href) %}
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ href }}">{{ text }}</a>
+    </li>
+{% endmacro %}
+
+{% macro navdropdown(text, href, items) %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{{ href }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{ text }}
+        </a>
+        <ul class="dropdown-menu">
+            {% for item in items %}
+                <li>
+                    <a class="dropdown-item" href="{{ item.href }}">{{ item.text }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+{% endmacro %}
+
+{% macro foot(table, family, license) %}
+    <footer class="py-3 my-4">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        {% for item in table %}
+            <li class="nav-item">
+                <a href="{{ item.href }}" class="nav-link px-2 text-body-secondary">{{ item.text }}</a>
+            </li>
+        {% endfor %}
+
+        <li class="nav-item">|</li>
+
+        {% for item in family %}
+            <li class="nav-item">
+                <a href="{{ item.href }}" class="nav-link px-2 text-body-secondary">{{ item.text }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+        <p class="text-center text-body-secondary">{{ license }}</p>
+    </footer>
+{% endmacro %}

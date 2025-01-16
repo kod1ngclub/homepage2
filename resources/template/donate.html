@@ -1,1 +1,19 @@
-This is Donate
+{% import "components/head.html" as head %}
+
+{% extends "layout.html" %}
+
+{% block meta %}
+    {{ head.meta("Donate", "kod1ngclub, donate, buy me a coffee", "Donate page of kod1ngclub") }}
+{% endblock %}
+
+{% block opengraph %}
+    {{ head.opengraph("Donate", "Donate page of kod1ngclub", "https://www.example.com", "https://www.example.com/og.png", 1200, 600, "Opengraph Image") }}
+{% endblock %}
+
+{% block content %}
+    <h2>Welcome to the Donate Page</h2>
+    <p>This is the content for the home page.</p>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

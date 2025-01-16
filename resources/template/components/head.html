@@ -1,0 +1,36 @@
+{% macro meta(title, keyword, subject) %} {% set sitename = "kod1ngclub" %} {%
+set author = "kod1ngclub" %} {% set email = "groomusemail@gmail.com" %}
+
+<title>{{ sitename }} - {{ title }}</title>
+
+<meta http-equiv="Title" content="{{ sitename }} - {{ title }}" />
+<meta http-equiv="Subject" content="{{ subject }}" />
+<meta http-equiv="Author" content="{{ author }}" />
+<meta http-equiv="publisher" content="{{ author }}" />
+<meta http-equiv="Other Agent" content="{{ author }}" />
+<meta http-equiv="Distribution" content="{{ author }}" />
+<meta http-equiv="Reply-To" content="{{ email }}" />
+<meta http-equiv="Email" content="{{ email }}" />
+
+<meta name="keyword" content="{{ keyword }}" />
+<meta name="description" content="{{ subject }}" />
+<meta name="author" content="{{ author }}" />
+{% endmacro %} {% macro opengraph(title, description, url, image, width, height,
+alt) %} {% set sitename = "kod1ngclub" %} {% set ogtype = "website" %} {% set
+twitype = "summary" %} {% set imgtype = "image/png" %}
+
+<meta property="og:title" content="{{ sitename }} - {{ title }}" />
+<meta property="og:description" content="{{ description }}" />
+<meta property="og:type" content="{{ ogtype }}" />
+<meta property="og:url" content="{{ url }}" />
+<meta property="og:image" content="{{ image }}" />
+<meta property="og:image:type" content="{{ imgtype }}" />
+<meta property="og:image:width" content="{{ width }}" />
+<meta property="og:image:height" content="{{ height }}" />
+<meta property="og:image:alt" content="{{ alt }}" />
+<meta name="twitter:url" content="{{ url }}" />
+<meta name="twitter:card" content="{{ twitype }}" />
+<meta name="twitter:title" content="{{ sitename }} - {{ title }}" />
+<meta name="twitter:description" content="{{ description }}" />
+<meta name="twitter:image" content="{{ image }}" />
+{% endmacro %}
